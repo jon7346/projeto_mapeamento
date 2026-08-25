@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+    @theme {
+        --color-custom-bg: #0b1220;;
+        --color-custom-panel: #111b2e;
+        --color-custom-panel2: #0e1728;
+        --color-custom-line: #22314d;
+        --color-custom-text: #e7ecf5;
+        --color-custom-muted: #8a97b3;
+        --color-custom-amber: #8a97b3;
+    }
+
+
