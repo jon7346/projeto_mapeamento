@@ -43,7 +43,7 @@ function obterTop5Relacoes(dados, arrayA, arrayB) {
 
     // Array que guarda em qual "tentativa" cada item do arrayA está
     const tentativas = Array(arrayA.length).fill(0);
-    
+
     // Objeto para registrar qual campo de destino já foi pego e por quem
     const alocacoesDestino = {};
 
@@ -62,7 +62,7 @@ function obterTop5Relacoes(dados, arrayA, arrayB) {
         // Se o destino está livre, alocamos para o indexAtualA
         if (alocacoesDestino[nomeDestino] === undefined) {
             alocacoesDestino[nomeDestino] = indexAtualA;
-        } 
+        }
         // Se o destino já está ocupado, precisamos resolver o conflito
         else {
             const indexCompetidorA = alocacoesDestino[nomeDestino];
@@ -71,11 +71,11 @@ function obterTop5Relacoes(dados, arrayA, arrayB) {
             // Se o atual tiver uma distância MENOR, ele rouba a vaga
             if (candidato.distancia < candidatoCompetidor.distancia) {
                 alocacoesDestino[nomeDestino] = indexAtualA;
-                
+
                 // O competidor perdeu a vaga, avança para a próxima tentativa e volta pra fila
                 tentativas[indexCompetidorA]++;
                 fila.push(indexCompetidorA);
-            } 
+            }
             // Se o atual for PIOR ou IGUAL, ele perde, avança para a próxima tentativa e volta pra fila
             else {
                 tentativas[indexAtualA]++;
@@ -89,14 +89,14 @@ function obterTop5Relacoes(dados, arrayA, arrayB) {
     for (let i = 0; i < arrayA.length; i++) {
         const ranking = todosRankings[i];
         const indexMelhorOpcao = tentativas[i];
-        
+
         // Se por algum motivo as opções se esgotaram (ex: arrayB menor que arrayA), 
         // ele pega a primeira opção original
         const melhorOpcao = indexMelhorOpcao < ranking.length ? ranking[indexMelhorOpcao] : ranking[0];
-        
+
         // Recorta os 5 primeiros originais para exibição
         const top3 = ranking.slice(0, 5);
-        
+
         relacoes.push(new DistanciaLevenshtein(arrayA[i].campo, melhorOpcao, top3));
     }
 
@@ -107,10 +107,10 @@ function relacionarCampos(arrayA, arrayB) {
     var dados = [];
 
     // Início do processo de Levenshtein
-    for(var i = 0; i < arrayA.length; i++) {
+    for (var i = 0; i < arrayA.length; i++) {
         dados[i] = [];
 
-        for(var j = 0; j < arrayB.length; j++) {
+        for (var j = 0; j < arrayB.length; j++) {
             var campoA = limparNomeCampo(arrayA[i].campo);
             var campoB = limparNomeCampo(arrayB[j].campo);
             dados[i][j] = calcularLevenshtein(campoA, campoB);
